@@ -1,0 +1,139 @@
+body {
+    display: grid;
+    place-items: center;
+    height: 100vh;
+    background: linear-gradient(
+        to bottom,
+        #009688 15%,
+        #D8DBD5 15%
+    );
+}
+
+h1, h2, h3, h4, h5, h6, p {
+    margin: 0px;
+}
+
+/* APPLICAZIONE */
+.web-app {
+    height: 90%;
+    width: 80%;
+    background-color: white;
+    display: flex;
+}
+
+
+/* ZONA DELLE CHAT/ACCOUNT/NOTIFICA */
+.chats {
+    width: 500px;
+}
+
+.chats img {
+    height: 100%;
+    border-radius: 50%;
+    padding: 10px;
+}
+
+/**** zona profile/settings ****/
+.chats .account {
+    background-color: #dedede;
+    height: 75px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* zona profile pic */
+.chats .account .proPic {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.chats .account .proPic span {
+    font-size: 1.5em;
+}
+
+/* icone settings */
+.chats .account .icons {
+    padding: 1em;
+    font-size: 1.5em;
+}
+
+.chats .account .icons i {
+    padding-left: 0.5em;
+    color: grey;
+}
+
+/**** zona attiva notifiche desktop ****/
+.chats .popup-notifiche {
+    background-color: #8EDAFC;
+    display: flex;
+    align-items: center;
+}
+
+/* icona notifica desktop */
+.chats .popup-notifiche .icon {
+    padding: 8px 11px;
+    margin: 12px 10px;
+    border-radius: 50%;
+    background-color: white;
+    color: #8EDAFC;
+    font-size: 1.3em;
+}
+
+/* testo notifica desktop */
+.chats .popup-notifiche .popup-text p {
+    text-decoration: underline;
+    font-size: 0.85em;
+    color: rgb(82, 82, 82);
+}
+
+/**** zona search chat ****/
+.chats .search {
+    padding: 5px;
+    margin-bottom: 0px!important;
+    background-color: #f2f2f2;
+}
+
+.chats .search span {
+    background-color: white;
+}
+
+.chats .search span i {
+    padding-inline: 0.6em;
+    color: rgb(184, 184, 184);
+}
+
+.chats .search input {
+    border-left: 0px;
+    padding-left: 0px;
+    color: rgb(184, 184, 184);
+}
+
+.chats .search input::placeholder {
+    color: rgb(184, 184, 184);
+    opacity: 1; /* Firefox */
+}
+
+/**** elenco chat ****/
+.chats .elenco-chat {
+    overflow-y: scroll;
+}
+
+.chats .chat-singola {
+    height: 90px;
+}
+
+.chats .chat-singola img {
+    height: 100%;
+    border-radius: 50%;
+    padding: 10px;
+}
+
+
+/* ZONA CHAT SELEZIONATA */
+.chat {
+    flex: 1 1 35%;
+    background-color: green;
+}
