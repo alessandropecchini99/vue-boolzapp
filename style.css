@@ -15,7 +15,7 @@ h1, h2, h3, h4, h5, h6, p {
 
 /* APPLICAZIONE */
 .web-app {
-    height: 90%;
+    height: 1200px;
     width: 80%;
     background-color: white;
     display: flex;
@@ -27,15 +27,10 @@ h1, h2, h3, h4, h5, h6, p {
     width: 500px;
 }
 
-.chats img {
-    height: 100%;
-    border-radius: 50%;
-    padding: 10px;
-}
-
 /**** zona profile/settings ****/
 .chats .account {
     background-color: #dedede;
+    border-right: 1px solid rgb(202, 202, 202);
     height: 75px;
     width: 100%;
     display: flex;
@@ -48,6 +43,12 @@ h1, h2, h3, h4, h5, h6, p {
     height: 100%;
     display: flex;
     align-items: center;
+}
+
+.chats .account .proPic img {
+    height: 100%;
+    border-radius: 50%;
+    padding: 10px;
 }
 
 .chats .account .proPic span {
@@ -92,7 +93,6 @@ h1, h2, h3, h4, h5, h6, p {
 /**** zona search chat ****/
 .chats .search {
     padding: 5px;
-    margin-bottom: 0px!important;
     background-color: #f2f2f2;
 }
 
@@ -119,21 +119,151 @@ h1, h2, h3, h4, h5, h6, p {
 /**** elenco chat ****/
 .chats .elenco-chat {
     overflow-y: scroll;
+    height: calc(1200px - 194.2px);
 }
 
 .chats .chat-singola {
+    border-top: 1px solid rgb(236, 236, 236);
     height: 90px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
 }
 
-.chats .chat-singola img {
+.chats .chat-singola .info-contact {
+    display: flex;
+    width: 85%;
+}
+
+.chats .chat-singola .orario, .info-contact div {
+    padding-top: 10px;
+    padding-right: 10px;
+}
+
+.chats .chat-singola .info-contact img {
     height: 100%;
     border-radius: 50%;
     padding: 10px;
 }
 
+.chats .chat-singola .orario {
+    color: rgb(170, 170, 170);
+}
+
+
+/* ********************************************************** */
+
 
 /* ZONA CHAT SELEZIONATA */
 .chat {
     flex: 1 1 35%;
-    background-color: green;
+    background-image: url(img/mine.jpg);
+    display: flex;
+    flex-direction: column;
+}
+
+/* sezione chat selezionata */
+.chat .title-chat {
+    background-color: #dedede;
+    height: 75px;
+    display: flex;
+    justify-content: space-between;
+    top: 0;
+    right: 0;
+    left: 0;
+}
+
+.chat .title-chat .profile {
+    display: flex;
+    align-items: center;
+}
+
+.chat .title-chat .profile img {
+    height: 100%;
+    border-radius: 50%;
+    padding: 10px;
+}
+
+.chat .title-chat .profile p {
+    font-size: 0.8em;
+    color: grey;
+}
+
+.chat .title-chat .icons {
+    color: grey;
+    font-size: 1.5em;
+    display: flex;
+    align-items: center;
+}
+
+.chat .title-chat .icons i {
+    padding-right: 1em;
+}
+
+/* sezione chat conversazione */
+.chat .conversazione {
+    height: 100%;
+    width: 100%;
+    margin-top: 2em;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+.chat .conversazione .mex {
+    border-radius: 10px;
+    height: fit-content;
+    max-width: 50%;
+    min-width: 10%;
+    padding-inline: 20px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat .conversazione .mex .testo {
+    height: fit-content;
+}
+
+.chat .conversazione .mex .mex-orario {
+    font-size: 0.6em;
+    align-self: flex-end;
+    height: fit-content;
+}
+
+.chat .conversazione .ricevuto {
+    background-color: white;
+    margin-left: 5%;
+}
+
+.chat .conversazione .inviato {
+    background-color: #D5F9BA;
+    margin-right: 5%;
+    align-self: flex-end;
+}
+
+
+/* sezione chat scrittura messaggio */
+.chat .messaggio {
+    height: 75px;
+    width: 100%;
+    background-color: #F3EEEA;
+    border-left: 1px solid rgb(202, 202, 202);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.chat .messaggio i {
+    color: grey;
+    font-size: 1.5em;
+    margin-inline: 1.5em;
+}
+
+.chat .messaggio input {
+    width: 100%;
+    padding: 7px;
+    border-radius: 5px;
+    border: 1px white solid;
 }
