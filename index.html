@@ -85,13 +85,13 @@
 
         <!-- sezione chat selezionata -->
         <div class="title-chat">
-          <div :class="selected" class="profile">
-            <img v-if="selected.name == ``" src="img/avatar_1.jpg">
-            <img v-else :src="selected.avatar">
+          <div class="profile">
+            <img v-if="contacts[activeIndex].name == ``" src="img/avatar_1.jpg">
+            <img v-else :src="contacts[activeIndex].avatar">
             <div>
-              <h5 v-if="selected.avatar == ``"> Michele </h5>
-              <h5 v-else> {{ selected.name }} </h5>
-              <p>ultimo accesso oggi alle {{ selected.date }}</p>
+              <h5 v-if="contacts[activeIndex].avatar == ``"> Michele </h5>
+              <h5 v-else> {{ contacts[activeIndex].name }} </h5>
+              <p>ultimo accesso oggi alle {{ contacts[activeIndex].messages[contacts[activeIndex].messages.length - 1].date.slice(11, 16) }}</p>
             </div>
           </div>
           <div class="icons">
@@ -108,7 +108,7 @@
             <p class="testo"> {{ mex.message }} </p>
             <p class="mex-orario"> {{ mex.date }} </p> <!-- sistemare -->
 
-          <div :class="{ triangle_ricevuto: this.contacts[activeIndex].messages.status == `received`, triangle_inviato: this.contacts[activeIndex].messages.status == `sent` }"></div>
+          <div :class="{ triangle_ricevuto: mex.status == `received`, triangle_inviato: mex.status == `sent` }"></div>
 
           </div>
 
