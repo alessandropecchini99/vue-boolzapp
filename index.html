@@ -23,7 +23,7 @@
   <body>
 
     <!-- APPLICAZIONE -->
-    <div class="web-app d-flex">
+    <div class="web-app d-flex" id="app">
 
       <!-- ZONA DELLE CHATS -->
       <div class="chats">
@@ -59,98 +59,21 @@
         <!-- zona search chat -->
         <div class="input-group search">
           <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-magnifying-glass"></i></span>
-          <input type="text" class="form-control" placeholder="Cerca o inizia una nuova chat" aria-label="Username" aria-describedby="basic-addon1">
+          <input v-model="userSearch" type="text" class="form-control" placeholder="Cerca o inizia una nuova chat" aria-label="Username" aria-describedby="basic-addon1">
         </div>
 
         <!-- elenco delle chat -->
         <div class="elenco-chat">
 
-          <div class="chat-singola">
-            <div class="info-contact">
-              <img src="img/avatar_1.jpg" alt="avatar1">
+          <div v-for="(contact, i) in filteredItems" :key="contact.avatar" class="chat-singola">
+            <div @click="openChat(i)" class="info-contact">
+              <img :src="contact.avatar">
               <div>
-                <h5>Michele</h5>
-                <p>prova</p>
+                <h5> {{ contact.name }} </h5>
+                <p> {{ contact.messages[contact.messages.length - 1].message }} </p>
               </div>
             </div>
-            <div class="orario">12:00</div>
-          </div>
-
-          <div class="chat-singola">
-            <div class="info-contact">
-              <img src="img/avatar_2.jpg" alt="avatar2">
-              <div>
-                <h5>fabio</h5>
-                <p>prova</p>
-              </div>
-            </div>
-            <div class="orario">12:00</div>
-          </div>
-
-          <div class="chat-singola">
-            <div class="info-contact">
-              <img src="img/avatar_3.jpg" alt="avatar3">
-              <div>
-                <h5>Michele</h5>
-                <p>prova</p>
-              </div>
-            </div>
-            <div class="orario">12:00</div>
-          </div>
-
-          <div class="chat-singola">
-            <div class="info-contact">
-              <img src="img/avatar_4.jpg" alt="avatar4">
-              <div>
-                <h5>fabio</h5>
-                <p>prova</p>
-              </div>
-            </div>
-            <div class="orario">12:00</div>
-          </div>
-
-          <div class="chat-singola">
-            <div class="info-contact">
-              <img src="img/avatar_5.jpg" alt="avatar5">
-              <div>
-                <h5>Michele</h5>
-                <p>prova</p>
-              </div>
-            </div>
-            <div class="orario">12:00</div>
-          </div>
-
-          <div class="chat-singola">
-            <div class="info-contact">
-              <img src="img/avatar_6.jpg" alt="avatar6">
-              <div>
-                <h5>fabio</h5>
-                <p>prova</p>
-              </div>
-            </div>
-            <div class="orario">12:00</div>
-          </div>
-
-          <div class="chat-singola">
-            <div class="info-contact">
-              <img src="img/avatar_7.jpg" alt="avatar7">
-              <div>
-                <h5>Michele</h5>
-                <p>prova</p>
-              </div>
-            </div>
-            <div class="orario">12:00</div>
-          </div>
-
-          <div class="chat-singola">
-            <div class="info-contact">
-              <img src="img/avatar_8.jpg" alt="avatar8">
-              <div>
-                <h5>Michele</h5>
-                <p>prova</p>
-              </div>
-            </div>
-            <div class="orario">12:00</div>
+            <div class="orario"> {{ contact.messages[contact.messages.length - 1].date.slice(11, 16) }} </div>
           </div>
 
         </div>
@@ -162,10 +85,12 @@
 
         <!-- sezione chat selezionata -->
         <div class="title-chat">
-          <div class="profile">
-            <img src="img/avatar_1.jpg" alt="avatar1">
+          <div :class="selected" class="profile">
+            <img v-if="selected.name == ``" src="img/avatar_1.jpg">
+            <img v-else :src="selected.avatar">
             <div>
-              <h5>Michele</h5>
+              <h5 v-if="selected.avatar == ``"> Michele </h5>
+              <h5 v-else> {{ selected.name }} </h5>
               <p>ultimo accesso oggi alle 12:00</p>
             </div>
           </div>
@@ -176,26 +101,22 @@
           </div>
         </div>
 
+
         <div class="conversazione">
 
-          <div class="mex ricevuto">
-            <p class="testo">Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium et unde laudantium quas suscipit ipsa autem. Sapiente quibusdam quod, id dolorum distinctio similique recusandae placeat adipisci esse autem fugiat harum.</p>
-            <p class="mex-orario">15:00</p>
+          <div v-for="(mex, i) in arrMessages" :key="mex.date" class="mex" :class="{ ricevuto: this.arrMessages[i].status == `received`, inviato: this.arrMessages[i].status == `sent` }">
+            <p class="testo"> {{ mex.message }} </p>
+            <p class="mex-orario"> {{ mex.date }} </p> <!-- sistemare -->
           </div>
 
-          <div class="mex inviato">
-            <p class="testo">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus iste quod nemo, in eum vel asperiores totam corrupti vero id fugiat ullam delectus soluta alias voluptatum nobis eligendi exercitationem esse?</p>
-            <p class="mex-orario">15:00</p>
-          </div>
-          
         </div>
+
 
         <div class="messaggio">
           <div> <i class="fa-regular fa-face-smile"></i> </div>
-          <input type="text" placeholder="Scrivi un messaggio">
+          <input v-model="newInputSent.message" @keyup.enter="newMessages()" type="text" placeholder="Scrivi un messaggio">
           <div> <i class="fa-solid fa-microphone"></i> </div>
         </div>
-
 
       </div>
 
