@@ -3,11 +3,11 @@ Milestone 1 ----- FATTO
 - Replica della grafica con la possibilità di avere messaggi scritti dall’utente (verdi) e dall’interlocutore (bianco) assegnando due classi CSS diverse
 - Visualizzazione dinamica della lista contatti: tramite la direttiva v-for, visualizzare nome e immagine di ogni contatto
  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-Milestone 2 ----- FATTO
+Milestone 2 ----- FATTO A META'
 - Visualizzazione dinamica dei messaggi: tramite la direttiva v-for, visualizzare tutti i messaggi relativi al contatto attivo all’interno del pannello della conversazione
 - Click sul contatto mostra la conversazione del contatto cliccato
  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-Milestone 3 ----- FATTO
+Milestone 3
 Aggiunta di un messaggio: l’utente scrive un testo nella parte bassa e digitando “enter” il testo viene aggiunto al thread sopra, come messaggio verde
 Risposta dall’interlocutore: ad ogni inserimento di un messaggio, l’utente riceverà un “ok” come risposta, che apparirà dopo 1 secondo.
  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -186,28 +186,28 @@ const app = Vue.createApp({
                 name: ``,
                 date: ``
             },
-            arrMessages: {
-                name: 'Michele',
-                avatar: './img/avatar_1.jpg',
-                visible: true,
-                messages: [
-                    {
-                        date: '10/01/2020 15:30:55',
-                        message: 'Hai portato a spasso il cane?',
-                        status: 'sent'
-                    },
-                    {
-                        date: '10/01/2020 15:50:00',
-                        message: 'Ricordati di stendere i panni',
-                        status: 'sent'
-                    },
-                    {
-                        date: '10/01/2020 16:15:22',
-                        message: 'Tutto fatto!',
-                        status: 'received'
-                    }
-                ],
-            },
+            // arrMessages: {
+            //     name: 'Michele',
+            //     avatar: './img/avatar_1.jpg',
+            //     visible: true,
+            //     messages: [
+            //         {
+            //             date: '10/01/2020 15:30:55',
+            //             message: 'Hai portato a spasso il cane?',
+            //             status: 'sent'
+            //         },
+            //         {
+            //             date: '10/01/2020 15:50:00',
+            //             message: 'Ricordati di stendere i panni',
+            //             status: 'sent'
+            //         },
+            //         {
+            //             date: '10/01/2020 16:15:22',
+            //             message: 'Tutto fatto!',
+            //             status: 'received'
+            //         }
+            //     ],
+            // },
             newInputSent: {
                 date: '',
                 message: '',
@@ -219,42 +219,31 @@ const app = Vue.createApp({
                 status: 'received'
             },
             userSearch: ``,
+            activeIndex: 0,
         };
     },
     methods:  {
         openChat(index) {
-            this.selected.name = this.filteredItems[index].name;
-            this.selected.avatar = this.filteredItems[index].avatar;
-            this.selected.date = this.filteredItems[index].messages.date;
-                this.arrMessages = [];
-                for (let i = 0; i < this.filteredItems[index].messages.length; i++) {
-                    this.arrMessages.unshift(this.filteredItems[index].messages[this.filteredItems[index].messages.length - 1 - i]);
-                }
+            this.activeIndex = index;
         },
         newMessages() {
-            let now = new Date();
-            this.newInputSent.date = now.getHours() + ':' + now.getMinutes();
-            this.newInputReceived.date = now.getHours() + ':' + now.getMinutes();
-            this.arrMessages.push(this.newInputSent);
-            this.newInputSent = {
-                date: '',
-                message: '',
-                status: 'sent'
-            };
-            setTimeout(() => {
-                this.arrMessages.push(this.newInputReceived);
-              }, 1000);
+            // let now = new Date();
+            // this.newInputSent.date = now.getHours() + ':' + now.getMinutes();
+            // this.newInputReceived.date = now.getHours() + ':' + now.getMinutes();
+            // this.arrMessages.push(this.newInputSent);
+            // this.newInputSent = {
+            //     date: '',
+            //     message: '',
+            //     status: 'sent'
+            // };
+            // setTimeout(() => {
+            //     this.arrMessages.push(this.newInputReceived);
+            //   }, 1000);
         },
     },
-    mounted() {
-        this.selected.name = this.contacts[0].name;
-        this.selected.avatar = this.contacts[0].avatar;
-        this.selected.date = this.contacts[0].messages.date;
-            this.arrMessages = [];
-            for (let i = 0; i < this.contacts[0].messages.length; i++) {
-                this.arrMessages.unshift(this.contacts[0].messages[this.contacts[0].messages.length - 1 - i]);
-                }
-    },
+    // mounted() {
+    // AIUTO
+    // },
     computed: {
         filteredItems() {
           if (!this.userSearch) {
