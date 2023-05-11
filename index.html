@@ -65,7 +65,7 @@
         <!-- elenco delle chat -->
         <div class="elenco-chat">
 
-          <div v-for="(contact, i) in filteredItems" :key="contact.avatar" class="chat-singola">
+          <div v-for="(contact, i) in filteredItems" :key="contact.name" class="chat-singola" :class="arrMessages">
             <div @click="openChat(i)" class="info-contact">
               <img :src="contact.avatar">
               <div>
@@ -107,6 +107,9 @@
           <div v-for="(mex, i) in arrMessages" :key="mex.date" class="mex" :class="{ ricevuto: this.arrMessages[i].status == `received`, inviato: this.arrMessages[i].status == `sent` }">
             <p class="testo"> {{ mex.message }} </p>
             <p class="mex-orario"> {{ mex.date }} </p> <!-- sistemare -->
+
+          <div :class="{ triangle_ricevuto: this.arrMessages[i].status == `received`, triangle_inviato: this.arrMessages[i].status == `sent` }"></div>
+
           </div>
 
         </div>
@@ -121,6 +124,8 @@
       </div>
 
     </div>
+
+    <div class="triangle-ricevuto"></div>
 
   </body>
 </html>

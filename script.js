@@ -11,7 +11,7 @@ Milestone 3 ----- FATTO
 Aggiunta di un messaggio: l’utente scrive un testo nella parte bassa e digitando “enter” il testo viene aggiunto al thread sopra, come messaggio verde
 Risposta dall’interlocutore: ad ogni inserimento di un messaggio, l’utente riceverà un “ok” come risposta, che apparirà dopo 1 secondo.
  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-Milestone 4
+Milestone 4 ----- FATTO
 Ricerca utenti: scrivendo qualcosa nell’input a sinistra, vengono visualizzati solo i contatti il cui nome contiene le lettere inserite (es, Marco, Matteo Martina -> Scrivo “mar” rimangono solo Marco e Martina)
  */
 
@@ -183,7 +183,8 @@ const app = Vue.createApp({
             ],
             selected: {
                 avatar: ``,
-                name: ``
+                name: ``,
+                date: ``
             },
             arrMessages: {
                 name: 'Michele',
@@ -222,12 +223,13 @@ const app = Vue.createApp({
     },
     methods:  {
         openChat(index) {
-            this.selected.name = this.contacts[index].name;
-            this.selected.avatar = this.contacts[index].avatar;
+            this.selected.name = this.filteredItems[index].name;
+            this.selected.avatar = this.filteredItems[index].avatar;
+            this.selected.date = this.filteredItems[index].messages.date;
                 this.arrMessages = [];
-                for (let i = 0; i < this.contacts[index].messages.length; i++) {
-                    this.arrMessages.unshift(this.contacts[index].messages[this.contacts[index].messages.length - 1 - i]);
-                  }
+                for (let i = 0; i < this.filteredItems[index].messages.length; i++) {
+                    this.arrMessages.unshift(this.filteredItems[index].messages[this.filteredItems[index].messages.length - 1 - i]);
+                }
         },
         newMessages() {
             let now = new Date();
@@ -247,6 +249,7 @@ const app = Vue.createApp({
     mounted() {
         this.selected.name = this.contacts[0].name;
         this.selected.avatar = this.contacts[0].avatar;
+        this.selected.date = this.contacts[0].messages.date;
             this.arrMessages = [];
             for (let i = 0; i < this.contacts[0].messages.length; i++) {
                 this.arrMessages.unshift(this.contacts[0].messages[this.contacts[0].messages.length - 1 - i]);

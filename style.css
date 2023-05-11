@@ -237,12 +237,36 @@ h1, h2, h3, h4, h5, h6, p {
     background-color: white;
     margin-left: 5%;
     align-self: flex-start;
+    position: relative;
+}
+
+.triangle_ricevuto {
+    width: 0;
+    height: 0;
+    border-left: 35px solid transparent;
+    border-right: 0px solid transparent;
+    border-bottom: 20px solid white;
+    position: absolute;
+    bottom: 0;
+    left: -20px;
 }
 
 .chat .conversazione .inviato {
     background-color: #D5F9BA;
     margin-right: 5%;
     align-self: flex-end;
+    position: relative;
+}
+
+.triangle_inviato {
+    width: 0;
+    height: 0;
+    border-left: 0px solid transparent;
+    border-right: 35px solid transparent;
+    border-bottom: 20px solid #D5F9BA;
+    position: absolute;
+    bottom: 0;
+    right: -20px;
 }
 
 
