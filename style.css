@@ -1,7 +1,8 @@
 body {
-    display: grid;
-    place-items: center;
     height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background: linear-gradient(
         to bottom,
         #009688 15%,
@@ -15,7 +16,7 @@ h1, h2, h3, h4, h5, h6, p {
 
 /* APPLICAZIONE */
 .web-app {
-    height: 1200px;
+    height: 90%;
     width: 80%;
     background-color: white;
     display: flex;
@@ -24,7 +25,10 @@ h1, h2, h3, h4, h5, h6, p {
 
 /* ZONA DELLE CHAT/ACCOUNT/NOTIFICA */
 .chats {
-    width: 500px;
+    min-width: 350px;
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
 }
 
 /**** zona profile/settings ****/
@@ -32,7 +36,6 @@ h1, h2, h3, h4, h5, h6, p {
     background-color: #dedede;
     border-right: 1px solid rgb(202, 202, 202);
     height: 75px;
-    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -41,6 +44,7 @@ h1, h2, h3, h4, h5, h6, p {
 /* zona profile pic */
 .chats .account .proPic {
     height: 100%;
+    width: 50%;
     display: flex;
     align-items: center;
 }
@@ -117,8 +121,8 @@ h1, h2, h3, h4, h5, h6, p {
 
 /**** elenco chat ****/
 .chats .elenco-chat {
-    overflow-y: scroll;
-    height: calc(1200px - 194.2px);
+    overflow-y: auto;
+    height: 100%;
 }
 
 .chats .chat-singola {
@@ -127,6 +131,14 @@ h1, h2, h3, h4, h5, h6, p {
     width: 100%;
     display: flex;
     justify-content: space-between;
+}
+
+.chats .chat-singola:hover {
+    background-color: rgb(245, 245, 245);
+}
+
+.chats .selected {
+    background-color: rgb(235, 235, 235);
 }
 
 .chats .chat-singola .info-contact {
@@ -201,14 +213,15 @@ h1, h2, h3, h4, h5, h6, p {
 
 /* sezione chat conversazione */
 .chat .conversazione {
-    height: 100%;
+    flex: 1 0 calc(100% - 150px);
     width: 100%;
     padding-top: 2em;
     padding-bottom: 2em;
     display: flex;
     flex-direction: column;
     gap: 2em;
-    overflow-y: scroll;
+    overflow-y: auto;
+    position: relative;
 }
 
 .chat .conversazione .mex {
@@ -216,26 +229,64 @@ h1, h2, h3, h4, h5, h6, p {
     height: fit-content;
     max-width: 40%;
     min-width: 10%;
-    padding-inline: 20px;
-    padding-top: 10px;
+    padding-top: 5px;
     padding-bottom: 5px;
     display: flex;
     flex-direction: column;
+}
+
+.delete_sent {
+    height: fit-content;
+    padding-left: 1em;
+    position: absolute;
+    top: 4px;
+    right: 6px;
+    font-size: 0.9em;
+    color: black;
+    display: none;
+}
+
+.chat .conversazione .mex:hover .delete_sent {
+    display: block;
+    cursor: pointer;
+}
+
+.delete_received {
+    height: fit-content;
+    position: absolute;
+    top: 4px;
+    left: 6px;
+    font-size: 0.9em;
+    color: black;
+    display: none;
+}
+
+.chat .conversazione .mex:hover .delete_received {
+    display: block;
+    cursor: pointer;
 }
 
 .chat .conversazione .mex .testo {
     height: fit-content;
 }
 
-.chat .conversazione .mex .mex-orario {
+.chat .conversazione .inviato .mex-orario {
     font-size: 0.6em;
     align-self: flex-end;
+    height: fit-content;
+}
+
+.chat .conversazione .ricevuto .mex-orario {
+    font-size: 0.6em;
+    align-self: flex-start;
     height: fit-content;
 }
 
 .chat .conversazione .ricevuto {
     background-color: white;
     margin-left: 5%;
+    padding-right: 15px;
+    padding-left: 25px;
     align-self: flex-start;
     position: relative;
 }
@@ -254,6 +305,8 @@ h1, h2, h3, h4, h5, h6, p {
 .chat .conversazione .inviato {
     background-color: #D5F9BA;
     margin-right: 5%;
+    padding-right: 25px;
+    padding-left: 15px;
     align-self: flex-end;
     position: relative;
 }

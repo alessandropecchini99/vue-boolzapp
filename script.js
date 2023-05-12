@@ -13,7 +13,11 @@ Risposta dall’interlocutore: ad ogni inserimento di un messaggio, l’utente r
  - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 Milestone 4 ----- FATTO
 Ricerca utenti: scrivendo qualcosa nell’input a sinistra, vengono visualizzati solo i contatti il cui nome contiene le lettere inserite (es, Marco, Matteo Martina -> Scrivo “mar” rimangono solo Marco e Martina)
- */
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Milestone 5 - opzionale ----- FATTO
+- Cancella messaggio: cliccando sul messaggio appare un menu a tendina che permette di cancellare il messaggio selezionato
+- Visualizzazione ora e ultimo messaggio inviato/ricevuto nella lista dei contatti 
+*/
 
 const app = Vue.createApp({
     data() {
@@ -196,13 +200,13 @@ const app = Vue.createApp({
         };
     },
     methods:  {
-        openChat(index) {
-            this.activeIndex = index;
+        openChat(element) {
+            this.activeIndex = this.contacts.indexOf(element);
         },
         newMessages() {
-            let now = new Date();
-            this.newInputSent.date = now.getHours() + ':' + now.getMinutes();
-            this.newInputReceived.date = now.getHours() + ':' + now.getMinutes();
+            let Time = luxon.DateTime;
+            this.newInputSent.date = Time.now().toFormat('dd/MM/yyyy HH:mm:ss');
+            this.newInputReceived.date = Time.now().toFormat('dd/MM/yyyy HH:mm:ss');
             this.contacts[this.activeIndex].messages.push(this.newInputSent);
             this.newInputSent = {
                 date: '',
@@ -213,10 +217,11 @@ const app = Vue.createApp({
                 this.contacts[this.activeIndex].messages.push(this.newInputReceived);
             }, 1000);
         },
+        deleteMessage(i) {
+            console.log(`click`);
+            this.contacts[this.activeIndex].messages.splice(i, 1);
+        }
     },
-    // mounted() {
-
-    // },
     computed: {
         filteredItems() {
           if (!this.userSearch) {
