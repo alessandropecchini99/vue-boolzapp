@@ -68,8 +68,8 @@
         <!-- elenco delle chat -->
         <div class="elenco-chat">
 
-          <div v-for="contact in filteredItems" :key="contact.name" class="chat-singola" :class="{ selected: contacts == activeIndex }">
-            <div @click="openChat(contact)" class="info-contact">
+          <div @click="openChat(contact)" v-for="(contact, index) in filteredItems" :key="contact.name" class="chat-singola" :class="{ selected: index == activeIndex }">
+            <div class="info-contact">
               <img :src="contact.avatar">
               <div>
                 <h5> {{ contact.name }} </h5>
@@ -81,7 +81,10 @@
 
         </div>
 
+
       </div>
+
+
 
       <!-- CHAT SELEZIONATA -->
       <div class="chat" v-cloak>
@@ -109,7 +112,7 @@
 
         <div class="conversazione">
 
-          <div v-for="(mex, i) in contacts[activeIndex].messages" :key="mex.date" class="mex" :class="{ ricevuto: mex.status == `received`, inviato: mex.status == `sent` }">
+          <div v-for="(mex, i) in contacts[activeIndex].messages" :key="i" class="mex" :class="{ ricevuto: mex.status == `received`, inviato: mex.status == `sent` }">
             <p class="testo"> {{ mex.message }} </p>
             <p class="mex-orario"> {{ mex.date.slice(11, 16) }} </p>
 
@@ -118,7 +121,6 @@
             </div>
 
             <div :class="{ triangle_ricevuto: mex.status == `received`, triangle_inviato: mex.status == `sent` }"></div>
-
           </div>
 
         </div>
