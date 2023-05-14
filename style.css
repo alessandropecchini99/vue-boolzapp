@@ -61,14 +61,15 @@ h1, h2, h3, h4, h5, h6, p {
 
 /* icone settings */
 .chats .account .icons {
-    padding: 1em;
+    padding-inline: 1em;
+    color: grey;
     font-size: 1.5em;
-    cursor: pointer;
+    display: flex;
+    gap: 0.8em;
 }
 
 .chats .account .icons i {
-    padding-left: 1em;
-    color: grey;
+    cursor: pointer;
 }
 
 /**** zona attiva notifiche desktop ****/
@@ -134,7 +135,7 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 .chats .chat-singola {
-    border-top: 1px solid rgb(236, 236, 236);
+    border-top: 1px solid rgb(235, 235, 235);
     height: 90px;
     width: 100%;
     display: flex;
@@ -142,7 +143,7 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 .chats .chat-singola:hover {
-    background-color: rgb(245, 245, 245);
+    background-color: rgb(225, 225, 225);
 }
 
 .chats .selected {
@@ -212,12 +213,14 @@ h1, h2, h3, h4, h5, h6, p {
 .chat .title-chat .icons {
     color: grey;
     font-size: 1.5em;
+    padding-right: 1em;
     display: flex;
     align-items: center;
+    gap: 0.8em;
 }
 
 .chat .title-chat .icons i {
-    padding-right: 1em;
+    cursor: pointer;
 }
 
 /* sezione chat conversazione */
@@ -346,6 +349,7 @@ h1, h2, h3, h4, h5, h6, p {
     color: grey;
     font-size: 1.5em;
     margin-inline: 1.5em;
+    cursor: pointer;
 }
 
 .chat .messaggio input {
@@ -358,6 +362,5 @@ h1, h2, h3, h4, h5, h6, p {
 
 .chat .messaggio input:focus {
   outline: 3px rgb(174, 174, 174)  solid;
-
   transition: 0.2s;
 }
