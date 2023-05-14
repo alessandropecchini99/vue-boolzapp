@@ -118,7 +118,7 @@ const app = Vue.createApp({
                         },
                         {
                             date: '10/01/2020 15:50:00',
-                            message: 'Va bene, stasera la sento 🌚',
+                            message: 'Va bene, stasera la sento',
                             status: 'received'
                         }
                     ],
@@ -208,6 +208,7 @@ const app = Vue.createApp({
             this.newInputSent.date = Time.now().toFormat('dd/MM/yyyy HH:mm:ss');
             this.newInputReceived.date = Time.now().toFormat('dd/MM/yyyy HH:mm:ss');
 
+            // controllo che se inserita una sola parola, non sia lunga più di 30 caratteri
             if (this.newInputSent.message.length > 30 && this.newInputSent.message.includes(` `) == false) {
                 let checkStringa = this.checkLength(this.newInputSent.message);
                 this.newInputSent.message = checkStringa;
@@ -237,7 +238,7 @@ const app = Vue.createApp({
     computed: {
         filteredItems() {
           if (!this.userSearch) {
-            // se la ricerca è vuota, restituisci tutti gli oggetti
+            // se la ricerca è vuota, restituisce tutti gli oggetti
             return this.contacts
           } else {
             // altrimenti, filtra gli oggetti in base alla ricerca
