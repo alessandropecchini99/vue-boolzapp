@@ -63,6 +63,7 @@ h1, h2, h3, h4, h5, h6, p {
 .chats .account .icons {
     padding: 1em;
     font-size: 1.5em;
+    cursor: pointer;
 }
 
 .chats .account .icons i {
@@ -109,9 +110,16 @@ h1, h2, h3, h4, h5, h6, p {
     color: rgb(184, 184, 184);
 }
 
-.chats .search input {
-    border-left: 0px;
-    padding-left: 0px;
+.chats .search .my_form {
+    padding: 5px 0px 5px 0px;
+    border: 1px #dee2e6 solid;
+    border-left: none;
+    border-radius: 5px;
+    width: calc(100% - 61.2px);
+}
+
+.chats .search input:focus {
+    outline: none;
 }
 
 .chats .search input::placeholder {
@@ -345,8 +353,11 @@ h1, h2, h3, h4, h5, h6, p {
     padding: 7px;
     border-radius: 5px;
     border: 1px white solid;
+    outline: none;
 }
 
 .chat .messaggio input:focus {
-    
+  outline: 3px rgb(174, 174, 174)  solid;
+
+  transition: 0.2s;
 }
