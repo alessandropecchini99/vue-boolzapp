@@ -107,7 +107,7 @@ const app = Vue.createApp({
                     ],
                 },
                 {
-                    name: 'Alessandro L.',
+                    name: 'Alessandro P.',
                     avatar: './img/avatar_5.jpg',
                     visible: true,
                     messages: [
@@ -118,7 +118,7 @@ const app = Vue.createApp({
                         },
                         {
                             date: '10/01/2020 15:50:00',
-                            message: 'Va bene, stasera la sento',
+                            message: 'Va bene, stasera la sento 🌚',
                             status: 'received'
                         }
                     ],
@@ -135,7 +135,7 @@ const app = Vue.createApp({
                         },
                         {
                             date: '10/01/2020 15:50:00',
-                            message: 'Non ancora',
+                            message: 'Boh',
                             status: 'received'
                         },
                         {
@@ -192,7 +192,7 @@ const app = Vue.createApp({
             },
             newInputReceived: {
                 date: '',
-                message: 'Ok!',
+                message: 'Non so che dirti, scusa',
                 status: 'received'
             },
             userSearch: ``,
@@ -207,12 +207,18 @@ const app = Vue.createApp({
             let Time = luxon.DateTime;
             this.newInputSent.date = Time.now().toFormat('dd/MM/yyyy HH:mm:ss');
             this.newInputReceived.date = Time.now().toFormat('dd/MM/yyyy HH:mm:ss');
+
+            if (this.newInputSent.message.length > 30 && this.newInputSent.message.includes(` `) == false) {
+                let checkStringa = this.checkLength(this.newInputSent.message);
+                this.newInputSent.message = checkStringa;
+            }
             this.contacts[this.activeIndex].messages.push(this.newInputSent);
             this.newInputSent = {
                 date: '',
                 message: '',
                 status: 'sent'
             };
+
             setTimeout(() => {
                 this.contacts[this.activeIndex].messages.push(this.newInputReceived);
             }, 1000);
@@ -220,6 +226,12 @@ const app = Vue.createApp({
         deleteMessage(i) {
             console.log(`click`);
             this.contacts[this.activeIndex].messages.splice(i, 1);
+        },
+        checkLength(value) {
+            console.log(`stringa accorciata`)
+            let stringa = value.substring(0, 53);
+            let nuovaStringa = stringa.substring(0, stringa.length - 3) + "...";
+            return nuovaStringa
         }
     },
     computed: {
