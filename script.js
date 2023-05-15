@@ -204,6 +204,7 @@ const app = Vue.createApp({
             this.activeIndex = this.contacts.indexOf(element);
         },
         newMessages() {
+            // orario
             let Time = luxon.DateTime;
             this.newInputSent.date = Time.now().toFormat('dd/MM/yyyy HH:mm:ss');
             this.newInputReceived.date = Time.now().toFormat('dd/MM/yyyy HH:mm:ss');
@@ -213,6 +214,7 @@ const app = Vue.createApp({
                 let checkStringa = this.checkLength(this.newInputSent.message);
                 this.newInputSent.message = checkStringa;
             }
+            // per poi insesire il nuovo messaggio
             this.contacts[this.activeIndex].messages.push(this.newInputSent);
             this.newInputSent = {
                 date: '',
@@ -220,15 +222,18 @@ const app = Vue.createApp({
                 status: 'sent'
             };
 
+            // risposta automatica dopo 1 sec
             setTimeout(() => {
                 this.contacts[this.activeIndex].messages.push(this.newInputReceived);
             }, 1000);
         },
         deleteMessage(i) {
+            // elimino il messaggio selezionato
             console.log(`click`);
             this.contacts[this.activeIndex].messages.splice(i, 1);
         },
         checkLength(value) {
+            // controllo utilizzato in newMessages()
             console.log(`stringa accorciata`)
             let stringa = value.substring(0, 53);
             let nuovaStringa = stringa.substring(0, stringa.length - 3) + "...";
