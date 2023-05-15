@@ -209,23 +209,31 @@ const app = Vue.createApp({
             this.newInputSent.date = Time.now().toFormat('dd/MM/yyyy HH:mm:ss');
             this.newInputReceived.date = Time.now().toFormat('dd/MM/yyyy HH:mm:ss');
 
-            // controllo che se inserita una sola parola, non sia lunga più di 30 caratteri
-            if (this.newInputSent.message.length > 30 && this.newInputSent.message.includes(` `) == false) {
-                let checkStringa = this.checkLength(this.newInputSent.message);
-                this.newInputSent.message = checkStringa;
-            }
-            // per poi insesire il nuovo messaggio
-            this.contacts[this.activeIndex].messages.push(this.newInputSent);
-            this.newInputSent = {
-                date: '',
-                message: '',
-                status: 'sent'
-            };
+            // controllo che sia inserita una parola e se è inserita una sola parola, che non sia lunga più di 30 caratteri
+            if (this.newInputSent.message.length == 0) {
+                console.log(`non c'è contenuto`)
+            } else {
 
-            // risposta automatica dopo 1 sec
-            setTimeout(() => {
-                this.contacts[this.activeIndex].messages.push(this.newInputReceived);
-            }, 1000);
+                if (this.newInputSent.message.length > 30 && this.newInputSent.message.includes(` `) == false) {
+                    let checkStringa = this.checkLength(this.newInputSent.message);
+                    this.newInputSent.message = checkStringa;
+                }
+                // per poi insesire il nuovo messaggio
+                this.contacts[this.activeIndex].messages.push(this.newInputSent);
+                this.newInputSent = {
+                    date: '',
+                    message: '',
+                    status: 'sent'
+                };
+                this.fixScrollToBottom();
+    
+                // risposta automatica dopo 1 sec
+                setTimeout(() => {
+                    this.contacts[this.activeIndex].messages.push(this.newInputReceived);
+                    this.fixScrollToBottom();
+                }, 1000);
+
+            };
         },
         deleteMessage(i) {
             // elimino il messaggio selezionato
@@ -238,7 +246,14 @@ const app = Vue.createApp({
             let stringa = value.substring(0, 53);
             let nuovaStringa = stringa.substring(0, stringa.length - 3) + "...";
             return nuovaStringa
-        }
+        },
+        // Scroll sempre fissato in basso
+        fixScrollToBottom() {
+            this.$nextTick(() => {
+                let container = this.$refs.con;
+                container.scrollTop = container.scrollHeight;
+            });
+        },
     },
     computed: {
         filteredItems() {

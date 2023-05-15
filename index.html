@@ -114,7 +114,7 @@
 
 
 
-        <div class="conversazione">
+        <div class="conversazione" ref="con">
 
           <div v-for="(mex, i) in contacts[activeIndex].messages" :key="i" class="mex" :class="{ ricevuto: mex.status == `received`, inviato: mex.status == `sent` }">
             <p class="testo"> {{ mex.message }} </p>
