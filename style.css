@@ -57,6 +57,7 @@ h1, h2, h3, h4, h5, h6, p {
 
 .chats .account .proPic span {
     font-size: 1.5em;
+    cursor: default;
 }
 
 /* icone settings */
@@ -90,10 +91,15 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 /* testo notifica desktop */
+.chats .popup-notifiche .popup-text h6 {
+    cursor: default;
+}
+
 .chats .popup-notifiche .popup-text p {
     text-decoration: underline;
     font-size: 0.85em;
     color: rgb(82, 82, 82);
+    cursor: pointer;
 }
 
 /**** zona search chat ****/
@@ -140,6 +146,7 @@ h1, h2, h3, h4, h5, h6, p {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    cursor: pointer;
 }
 
 .chats .chat-singola:hover {
@@ -192,6 +199,7 @@ h1, h2, h3, h4, h5, h6, p {
     top: 0;
     right: 0;
     left: 0;
+    cursor: default;
 }
 
 .chat .title-chat .profile {
@@ -247,6 +255,7 @@ h1, h2, h3, h4, h5, h6, p {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+    cursor: default;
 }
 
 .delete_sent {

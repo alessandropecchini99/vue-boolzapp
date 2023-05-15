@@ -134,14 +134,12 @@
         <div class="messaggio">
           <div> <i class="fa-regular fa-face-smile"></i> </div>
           <input v-model="newInputSent.message" @keyup.enter="newMessages()" type="text" placeholder="Scrivi un messaggio">
-          <div> <i class="fa-solid fa-microphone"></i> </div>
+          <div> <i class="fa-solid fa-paper-plane" @click="newMessages()"></i> </div>
         </div>
 
       </div>
 
     </div>
-
-    <div class="triangle-ricevuto"></div>
 
   </body>
 </html>
