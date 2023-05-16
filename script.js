@@ -185,6 +185,14 @@ const app = Vue.createApp({
                     ],
                 },
             ],
+            arrReplies: [
+                `Ok!`,
+                `Scusa, ora sto giocando`,
+                `Ottimo!`,
+                `Adesso sono un po' occupato`,
+                `Non so che dirti`,
+                `Non ne sono sicuro`
+            ],
             newInputSent: {
                 date: '',
                 message: '',
@@ -192,11 +200,13 @@ const app = Vue.createApp({
             },
             newInputReceived: {
                 date: '',
-                message: 'Non so che dirti, scusa',
+                message: '',
                 status: 'received'
             },
             userSearch: ``,
             activeIndex: 0,
+            colorMode: true,
+            backgroundImageClass: `bck-image1`
         };
     },
     methods:  {
@@ -204,37 +214,59 @@ const app = Vue.createApp({
             this.activeIndex = this.contacts.indexOf(element);
         },
         newMessages() {
-            // orario
+            // orario del momento
             let Time = luxon.DateTime;
+
+            // setto orario messaggio inviato
             this.newInputSent.date = Time.now().toFormat('dd/MM/yyyy HH:mm:ss');
-            this.newInputReceived.date = Time.now().toFormat('dd/MM/yyyy HH:mm:ss');
 
             // controllo che sia inserita una parola e se è inserita una sola parola, che non sia lunga più di 30 caratteri
             if (this.newInputSent.message.length == 0) {
                 console.log(`non c'è contenuto`)
             } else {
-
-                if (this.newInputSent.message.length > 30 && this.newInputSent.message.includes(` `) == false) {
+            
+            if (this.newInputSent.message.length > 30 && this.newInputSent.message.includes(` `) == false) {
                     let checkStringa = this.checkLength(this.newInputSent.message);
                     this.newInputSent.message = checkStringa;
                 }
+                
                 // per poi insesire il nuovo messaggio
                 this.contacts[this.activeIndex].messages.push(this.newInputSent);
+
+                // per poi pulire il contenitore dei nuovi messaggi
                 this.newInputSent = {
                     date: '',
                     message: '',
                     status: 'sent'
                 };
+
+                // e fissare la scrollbar in basso
                 this.fixScrollToBottom();
     
                 // risposta automatica dopo 1 sec
                 setTimeout(() => {
+                    // setto orario del messaggio rivevuto
+                    this.newInputReceived.date = Time.now().toFormat('dd/MM/yyyy HH:mm:ss');
+
+                    // risposte randomizzate
+                    this.newInputReceived.message = this.arrReplies[this.getRandomInt(0, this.arrReplies.length - 1)];
+
                     this.contacts[this.activeIndex].messages.push(this.newInputReceived);
+
+                    this.newInputReceived = {
+                        date: '',
+                        message: '',
+                        status: 'received'
+                    };
+
                     this.fixScrollToBottom();
                 }, 1000);
+            }
 
-            };
         },
+		getRandomInt(min, max) {
+			return Math.floor(Math.random() * (max - min + 1) ) + min;
+		},
         deleteMessage(i) {
             // elimino il messaggio selezionato
             console.log(`click`);
@@ -247,13 +279,21 @@ const app = Vue.createApp({
             let nuovaStringa = stringa.substring(0, stringa.length - 3) + "...";
             return nuovaStringa
         },
-        // Scroll sempre fissato in basso
         fixScrollToBottom() {
+            // Scroll sempre fissato in basso
             this.$nextTick(() => {
-                let container = this.$refs.con;
+                let container = this.$refs.fixScroll;
                 container.scrollTop = container.scrollHeight;
             });
         },
+        changeColorMode() {
+            this.colorMode = !this.colorMode;
+            if (this.backgroundImageClass === 'bck-image1') {
+                this.backgroundImageClass = 'bck-image2';
+              } else {
+                this.backgroundImageClass = 'bck-image1';
+              }
+        }
     },
     computed: {
         filteredItems() {

@@ -26,118 +26,131 @@
   <body>
 
     <!-- APPLICAZIONE -->
-    <div class="web-app d-flex" id="app">
+    <div id="app">
 
-      <!-- ZONA DELLE CHATS -->
-      <div class="chats" v-cloak>
+      <div :class="colorMode ? `light_mode` : `dark_mode`" class="my_container">
 
-        <!-- zona account/settings -->
-        <div class="account">
+        <div class="bck-1"></div>
+        <div class="bck-2"></div>
 
-          <div class="proPic">
-            <img src="img/avatar_io.jpg" alt="myProfilePicture">
-            <span class="text•">Lisa</span>
+        <div class="web-app">
+    
+          <!-- ZONA DELLE CHATS -->
+          <div class="chats" v-cloak>
+    
+            <!-- zona account/settings -->
+            <div class="account">
+    
+              <div class="proPic">
+                <img src="img/avatar_io.jpg" alt="myProfilePicture">
+                <span class="text•">Lisa</span>
+              </div>
+    
+              <div class="icons">
+                <i class="fa-solid fa-circle-half-stroke" @click="changeColorMode"></i>
+                <i class="fa-solid fa-message"></i>
+                <i class="fa-solid fa-ellipsis-vertical"></i>
+              </div>
+    
+            </div>
+            
+    
+            <!-- zona "ricevi notifiche" -->
+            <div class="popup-notifiche">
+    
+              <div class="icon"> <i class="fa-solid fa-bell-slash"></i> </div>
+    
+              <div class="popup-text">
+                <h6>Ricevi notifiche di nuovi messaggi</h6>
+                <p>Attiva notifiche desktop</p>
+              </div>
+    
+            </div>
+    
+    
+            <!-- zona search chat -->
+            <div class="input-group search">
+              <span class="input-group-text" id="basic-addon1"> <i class="fa-solid fa-magnifying-glass"></i> </span>
+              <input v-model="userSearch" type="text" class="my_form" placeholder="Cerca una chat" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+    
+    
+            <!-- elenco delle chat -->
+            <div class="elenco-chat">
+    
+              <div @click="openChat(contact)" v-for="(contact, index) in filteredItems" :key="contact.name" class="chat-singola" :class="{ selected: index == activeIndex }">
+                <div class="info-contact">
+                  <img :src="contact.avatar">
+                  <div>
+                    <h5> {{ contact.name }} </h5>
+                    <p> {{ contact.messages.length ? contact.messages[contact.messages.length - 1].message : `** messaggi eliminati **` }} </p>
+                  </div>
+                </div>
+                <div class="orario"> {{ contact.messages.length ? contact.messages[contact.messages.length - 1].date.slice(11, 16) : `` }} </div>
+              </div>
+    
+            </div>
+    
+    
           </div>
-
-          <div class="icons">
-            <i class="fa-solid fa-circle-notch"></i>
-            <i class="fa-solid fa-message"></i>
-            <i class="fa-solid fa-ellipsis-vertical"></i>
-          </div>
-
-        </div>
-        
-
-        <!-- zona "ricevi notifiche" -->
-        <div class="popup-notifiche">
-
-          <div class="icon"> <i class="fa-solid fa-bell-slash"></i> </div>
-
-          <div class="popup-text">
-            <h6>Ricevi notifiche di nuovi messaggi</h6>
-            <p>Attiva notifiche desktop</p>
-          </div>
-
-        </div>
-
-
-        <!-- zona search chat -->
-        <div class="input-group search">
-          <span class="input-group-text" id="basic-addon1"> <i class="fa-solid fa-magnifying-glass"></i> </span>
-          <input v-model="userSearch" type="text" class="my_form" placeholder="Cerca una chat" aria-label="Username" aria-describedby="basic-addon1">
-        </div>
-
-
-        <!-- elenco delle chat -->
-        <div class="elenco-chat">
-
-          <div @click="openChat(contact)" v-for="(contact, index) in filteredItems" :key="contact.name" class="chat-singola" :class="{ selected: index == activeIndex }">
-            <div class="info-contact">
-              <img :src="contact.avatar">
-              <div>
-                <h5> {{ contact.name }} </h5>
-                <p> {{ contact.messages[contact.messages.length - 1].message }} </p>
+    
+    
+    
+    
+          <!-- CHAT SELEZIONATA -->
+          <div class="chat" v-cloak>
+    
+            <!-- sezione chat selezionata -->
+            <div class="title-chat">
+              <div class="profile">
+                <img v-if="contacts[activeIndex].name == ``" :src="contacts[0].avatar">
+                <img v-else :src="contacts[activeIndex].avatar">
+                <div>
+                  <h5 v-if="contacts[activeIndex].avatar == ``"> {{contacts[0].name}} </h5>
+                  <h5 v-else> {{ contacts[activeIndex].name }} </h5>
+    
+                  <p>ultimo accesso oggi alle {{ contacts[activeIndex].messages.length ? contacts[activeIndex].messages[this.contacts[activeIndex].messages.length - 1].date.slice(11, 16) : `00:00` }}</p>
+                </div>
+              </div>
+              <div class="icons">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <i class="fa-solid fa-paperclip"></i>
+                <i class="fa-solid fa-ellipsis-vertical"></i>
               </div>
             </div>
-            <div class="orario"> {{ contact.messages[contact.messages.length - 1].date.slice(11, 16) }} </div>
+    
+    
+    
+            <div class="conversazione" :class="[`conversazione`, backgroundImageClass]"  ref="fixScroll">
+              
+              <div v-for="(mex, i) in contacts[activeIndex].messages" :key="i" class="mex" :class="{ ricevuto: mex.status == `received`, inviato: mex.status == `sent` }">
+                <p class="testo"> {{ mex.message }} </p>
+                <p class="mex-orario"> {{ mex.date.slice(11, 16) }} </p>
+    
+                <div @click="deleteMessage(i)" :class="{ delete_received: mex.status == `received`, delete_sent: mex.status == `sent` }">
+                  <i class="fa-solid fa-xmark"></i>
+                </div>
+    
+                <div :class="{ triangle_ricevuto: mex.status == `received`, triangle_inviato: mex.status == `sent` }"></div>
+              </div>
+    
+            </div>
+    
+    
+    
+            <div class="messaggio">
+              <div> <i class="fa-regular fa-face-smile"></i> </div>
+              <input v-model="newInputSent.message" @keyup.enter="newMessages()" type="text" placeholder="Scrivi un messaggio">
+              <div> <i class="fa-solid fa-paper-plane" @click="newMessages()"></i> </div>
+            </div>
+    
           </div>
-
+    
         </div>
 
 
       </div>
 
-
-
-
-      <!-- CHAT SELEZIONATA -->
-      <div class="chat" v-cloak>
-
-        <!-- sezione chat selezionata -->
-        <div class="title-chat">
-          <div class="profile">
-            <img v-if="contacts[activeIndex].name == ``" src="img/avatar_1.jpg">
-            <img v-else :src="contacts[activeIndex].avatar">
-            <div>
-              <h5 v-if="contacts[activeIndex].avatar == ``"> Michele </h5>
-              <h5 v-else> {{ contacts[activeIndex].name }} </h5>
-
-              <p>ultimo accesso oggi alle {{ contacts[activeIndex].messages[this.contacts[activeIndex].messages.length - 1].date.slice(11, 16) }}</p>
-            </div>
-          </div>
-          <div class="icons">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <i class="fa-solid fa-paperclip"></i>
-            <i class="fa-solid fa-ellipsis-vertical"></i>
-          </div>
-        </div>
-
-
-
-        <div class="conversazione" ref="con">
-
-          <div v-for="(mex, i) in contacts[activeIndex].messages" :key="i" class="mex" :class="{ ricevuto: mex.status == `received`, inviato: mex.status == `sent` }">
-            <p class="testo"> {{ mex.message }} </p>
-            <p class="mex-orario"> {{ mex.date.slice(11, 16) }} </p>
-
-            <div @click="deleteMessage(i)" :class="{ delete_received: mex.status == `received`, delete_sent: mex.status == `sent` }">
-              <i class="fa-solid fa-xmark"></i>
-            </div>
-
-            <div :class="{ triangle_ricevuto: mex.status == `received`, triangle_inviato: mex.status == `sent` }"></div>
-          </div>
-
-        </div>
-
-
-
-        <div class="messaggio">
-          <div> <i class="fa-regular fa-face-smile"></i> </div>
-          <input v-model="newInputSent.message" @keyup.enter="newMessages()" type="text" placeholder="Scrivi un messaggio">
-          <div> <i class="fa-solid fa-paper-plane" @click="newMessages()"></i> </div>
-        </div>
-
-      </div>
 
     </div>
 
