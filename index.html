@@ -82,16 +82,18 @@
               <div @click="openChat(contact)" v-for="(contact, index) in filteredItems" :key="contact.name" class="chat-singola" :class="{ selected: index == activeIndex }">
                 <div class="info-contact">
                   <img :src="contact.avatar">
-                  <div>
+                  <div class="px-0">
                     <h5> {{ contact.name }} </h5>
-                    <p> {{ contact.messages.length ? contact.messages[contact.messages.length - 1].message : `** messaggi eliminati **` }} </p>
+                    <p v-if="contact.messages[contact.messages.length - 1].message.length < 40">
+                      {{ contact.messages.length ? contact.messages[contact.messages.length - 1].message : `** messaggi eliminati **`}}
+                    </p>
+                    <p v-else> {{ contact.messages[contact.messages.length - 1].message.slice(0, 40) + `...` }}  </p>
                   </div>
                 </div>
                 <div class="orario"> {{ contact.messages.length ? contact.messages[contact.messages.length - 1].date.slice(11, 16) : `` }} </div>
               </div>
     
             </div>
-    
     
           </div>
     

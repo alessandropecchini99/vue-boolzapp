@@ -238,7 +238,6 @@ h1, h2, h3, h4, h5, h6, p {
 .chat {
     flex: 1 1 70%;
     min-width: 500px;
-    /* background-image: var(--bg-content-chat); */
     display: flex;
     flex-direction: column;
 }
@@ -309,7 +308,7 @@ h1, h2, h3, h4, h5, h6, p {
 
 .chat .conversazione .mex {
     border-radius: 10px;
-    max-width: 500px;
+    max-width: 450px;
     min-width: 60px;
     padding-top: 5px;
     padding-bottom: 5px;
@@ -392,7 +391,6 @@ h1, h2, h3, h4, h5, h6, p {
     padding-left: 15px;
     align-self: flex-end;
     position: relative;
-    text-align: right;
 }
 
 .triangle_inviato {
@@ -429,7 +427,8 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 .chat .messaggio .emoji {
-    width: 200px;
+    width: 360px;
+    font-size: 1.5em;
     text-align: center;
     background-color: var(--bg-bck-color);
     cursor: pointer;
