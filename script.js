@@ -186,12 +186,19 @@ const app = Vue.createApp({
                 },
             ],
             arrReplies: [
-                `Ok!`,
-                `Scusa, ora sto giocando`,
+                `Ok! 🙃`,
+                `Scusa, ora sto giocando 🎮`,
                 `Ottimo!`,
-                `Adesso sono un po' occupato`,
-                `Non so che dirti`,
-                `Non ne sono sicuro`
+                `Adesso sono un po' occupato 💻`,
+                `Non so che dirti 😵‍💫`,
+                `Non ne sono sicuro`,
+                `Fai in fretta!`,
+                `Va bene`,
+                `D'accordo 🌚`,
+                `Perfetto!`,
+                `Non sono d'accordo`,
+                `Magari un'altro giorno 😅`
+
             ],
             emoticons: [
             '\u{1F600}', 
@@ -287,6 +294,7 @@ const app = Vue.createApp({
                 status: 'received'
             },
             userSearch: ``,
+            messageSearch: ``,
             activeIndex: 0,
             colorMode: false,
             backgroundImageClass: `bck-image2`,
@@ -386,17 +394,28 @@ const app = Vue.createApp({
         },
     },
     computed: {
-        filteredItems() {
+        filteredContacts() {
           if (!this.userSearch) {
             // se la ricerca è vuota, restituisce tutti gli oggetti
-            return this.contacts
+            return this.contacts;
           } else {
             // altrimenti, filtra gli oggetti in base alla ricerca
             return this.contacts.filter((contacts) => {
-              return contacts.name.toLowerCase().includes(this.userSearch.toLowerCase())
+              return contacts.name.toLowerCase().includes(this.userSearch.toLowerCase());
             })
           }
-        }
+        },
+        filteredMessages() {
+            if (!this.messageSearch) {
+              // se la ricerca è vuota, restituisce tutti gli oggetti
+              return this.contacts[this.activeIndex].messages;
+            } else {
+              // altrimenti, filtra gli oggetti in base alla ricerca
+              return this.contacts[this.activeIndex].messages.filter((messages) => {
+                return messages.message.toLowerCase().includes(this.messageSearch.toLowerCase());
+              })
+            }
+          }
     }
 });
 

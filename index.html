@@ -71,15 +71,19 @@
     
             <!-- zona search chat -->
             <div class="input-group search">
+
               <span class="input-group-text" id="basic-addon1"> <i class="fa-solid fa-magnifying-glass"></i> </span>
+
               <input v-model="userSearch" type="text" class="my_form" placeholder="Cerca una chat" aria-label="Username" aria-describedby="basic-addon1">
+
             </div>
     
     
             <!-- elenco delle chat -->
             <div class="elenco-chat">
     
-              <div @click="openChat(contact)" v-for="(contact, index) in filteredItems" :key="contact.name" class="chat-singola" :class="{ selected: index == activeIndex }">
+              <div @click="openChat(contact)" v-for="(contact, index) in filteredContacts" :key="contact.name" class="chat-singola" :class="{ selected: index == activeIndex }">
+
                 <div class="info-contact">
                   <img :src="contact.avatar">
                   <div class="px-0">
@@ -91,6 +95,7 @@
                   </div>
                 </div>
                 <div class="orario"> {{ contact.messages.length ? contact.messages[contact.messages.length - 1].date.slice(11, 16) : `` }} </div>
+
               </div>
     
             </div>
@@ -105,6 +110,7 @@
     
             <!-- sezione chat selezionata -->
             <div class="title-chat">
+
               <div class="profile">
                 <img v-if="contacts[activeIndex].name == ``" :src="contacts[0].avatar">
                 <img v-else :src="contacts[activeIndex].avatar">
@@ -115,18 +121,24 @@
                   <p>ultimo accesso oggi alle {{ contacts[activeIndex].messages.length ? contacts[activeIndex].messages[this.contacts[activeIndex].messages.length - 1].date.slice(11, 16) : `00:00` }}</p>
                 </div>
               </div>
-              <div class="icons">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <i class="fa-solid fa-paperclip"></i>
-                <i class="fa-solid fa-ellipsis-vertical px-1"></i>
+
+              <div class="icons dropstart">
+                <!-- search messages in chat -->
+                <button type="button" data-bs-toggle="dropdown" class="btn_dropdown">
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+                <div class="mySearch dropdown-menu dropdown-menu-end">
+                  <input v-model="messageSearch" type="text" placeholder="cerca un messaggio">
+                </div>
               </div>
+
             </div>
     
     
     
             <div class="conversazione" :class="[`conversazione`, backgroundImageClass]"  ref="fixScroll">
               
-              <div v-for="(mex, i) in contacts[activeIndex].messages" :key="i" class="mex" :class="{ ricevuto: mex.status == `received`, inviato: mex.status == `sent` }">
+              <div v-for="(mex, i) in filteredMessages" :key="i" class="mex" :class="{ ricevuto: mex.status == `received`, inviato: mex.status == `sent` }">
                 <p class="testo"> {{ mex.message }} </p>
                 <p class="mex-orario"> {{ mex.date.slice(11, 16) }} </p>
     
@@ -145,10 +157,10 @@
 
               <!-- emoji -->
               <div class="messaggio-icon">
-                <button type="button" data-bs-toggle="dropdown" class="btnEmoji">
+                <button type="button" data-bs-toggle="dropdown" class="btn_dropdown">
                   <i class="fa-regular fa-face-smile dropdown"></i>
                 </button>
-                <div class="emoji dropdown-menu">
+                <div class="emoji dropdown-menu dropdown-menu-top">
                   <template v-for="(emoticon, index) in emoticons">
                     <span @click="addEmoticon(index)">{{ emoticon }}</span>
                   </template>

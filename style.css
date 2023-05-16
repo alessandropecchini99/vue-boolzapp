@@ -62,6 +62,12 @@ h1, h2, h3, h4, h5, h6, p {
     margin: 0px;
 }
 
+.btn_dropdown {
+    background-color: var(--bg-bck-title);
+    border: 0px;
+    width: fit-content;
+}
+
 /* APPLICAZIONE */
 .web-app {
     height: 90%;
@@ -272,12 +278,15 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 .chat .title-chat .icons {
-    color: grey;
     font-size: 1.5em;
     padding-right: 1em;
     display: flex;
     align-items: center;
     gap: 0.8em;
+}
+
+.chat .title-chat .icons i {
+    color: grey;
 }
 
 .chat .title-chat .icons i {
@@ -304,6 +313,22 @@ h1, h2, h3, h4, h5, h6, p {
   
 .bck-image2 {
     background-image: url(img/dark_mode.jpg);
+}
+
+.chat .mySearch {
+    background-color: var(--bg-bck-color);
+    height: fit-content;
+}
+
+.chat .mySearch input {
+    background-color: var(--bg-bck-color);
+    color: var(--text-color);
+    border: 0px;
+    padding: 5px 10px;
+}
+
+.chat .mySearch input:focus {
+    outline: none;
 }
 
 .chat .conversazione .mex {
@@ -416,19 +441,13 @@ h1, h2, h3, h4, h5, h6, p {
     align-items: center;
 }
 
-.chat .messaggio .btnEmoji {
-    background-color: var(--bg-bck-title);
-    border: 0px;
-    width: fit-content;
-}
-
 .chat .messaggio .messaggio-icon {
     margin-inline: 2em;
 }
 
 .chat .messaggio .emoji {
     width: 360px;
-    font-size: 1.5em;
+    font-size: 1.8em;
     text-align: center;
     background-color: var(--bg-bck-color);
     cursor: pointer;
