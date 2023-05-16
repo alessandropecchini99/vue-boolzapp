@@ -189,6 +189,7 @@ h1, h2, h3, h4, h5, h6, p {
 /**** elenco chat ****/
 .chats .elenco-chat {
     overflow-y: auto;
+    overflow-x: none;
     height: 100%;
 }
 
@@ -309,7 +310,7 @@ h1, h2, h3, h4, h5, h6, p {
 .chat .conversazione .mex {
     border-radius: 10px;
     max-width: 500px;
-    min-width: 100px;
+    min-width: 60px;
     padding-top: 5px;
     padding-bottom: 5px;
     display: flex;
@@ -417,10 +418,26 @@ h1, h2, h3, h4, h5, h6, p {
     align-items: center;
 }
 
+.chat .messaggio .btnEmoji {
+    background-color: var(--bg-bck-title);
+    border: 0px;
+    width: fit-content;
+}
+
+.chat .messaggio .messaggio-icon {
+    margin-inline: 2em;
+}
+
+.chat .messaggio .emoji {
+    width: 200px;
+    text-align: center;
+    background-color: var(--bg-bck-color);
+    cursor: pointer;
+}
+
 .chat .messaggio i {
     color: grey;
     font-size: 1.5em;
-    margin-inline: 1.5em;
     cursor: pointer;
 }
 
