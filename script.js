@@ -30,17 +30,22 @@ const app = Vue.createApp({
                     messages: [
                         {
                             date: '10/01/2020 15:30:55',
-                            message: 'Hai portato a spasso il cane?',
-                            status: 'sent'
+                            message: 'Lo sai che ora in Boolzap TUTTE le icone hanno una funzione?',
+                            status: 'received'
                         },
                         {
                             date: '10/01/2020 15:50:00',
-                            message: 'Ricordati di stendere i panni',
+                            message: `Bellissimo!`,
                             status: 'sent'
                         },
                         {
                             date: '10/01/2020 16:15:22',
-                            message: 'Tutto fatto!',
+                            message: 'Già!',
+                            status: 'received'
+                        },
+                        {
+                            date: '10/01/2020 16:15:30',
+                            message: 'Provale e fammi sapere',
                             status: 'received'
                         }
                     ],
@@ -281,7 +286,10 @@ const app = Vue.createApp({
             '\u{1F64D}', 
             '\u{1F64E}', 
             '\u{1F64F}',
-            '\u{1F31A}'
+            '\u{1F31A}',
+            '\u{1F49B}',
+            '\u{1F498}',
+            '\u{1F3AE}',
             ],
             newInputSent: {
                 date: '',
@@ -363,7 +371,7 @@ const app = Vue.createApp({
 		},
         deleteMessage(i) {
             // elimino il messaggio selezionato
-            console.log(`click`);
+            console.log(`Messaggio eliminato`);
             this.contacts[this.activeIndex].messages.splice(i, 1);
         },
         checkLength(value) {

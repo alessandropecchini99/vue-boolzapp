@@ -285,6 +285,23 @@ h1, h2, h3, h4, h5, h6, p {
     gap: 0.8em;
 }
 
+.chat .mySearch {
+    background-color: var(--bg-bck-color);
+    height: fit-content;
+    border: 2px grey solid;
+}
+
+.chat .mySearch input {
+    background-color: var(--bg-bck-color);
+    color: var(--text-color);
+    border: 0px;
+    padding: 5px 10px;
+}
+
+.chat .mySearch input:focus {
+    outline: none;
+}
+
 .chat .title-chat .icons i {
     color: grey;
 }
@@ -313,22 +330,6 @@ h1, h2, h3, h4, h5, h6, p {
   
 .bck-image2 {
     background-image: url(img/dark_mode.jpg);
-}
-
-.chat .mySearch {
-    background-color: var(--bg-bck-color);
-    height: fit-content;
-}
-
-.chat .mySearch input {
-    background-color: var(--bg-bck-color);
-    color: var(--text-color);
-    border: 0px;
-    padding: 5px 10px;
-}
-
-.chat .mySearch input:focus {
-    outline: none;
 }
 
 .chat .conversazione .mex {
