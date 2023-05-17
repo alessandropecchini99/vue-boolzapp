@@ -43,14 +43,14 @@
     
               <div class="proPic">
                 <!-- aggiornare immagine profilo *********** -->
-                <img src="img/avatar_5.jpg" alt="myProfilePicture">
+                <img src="img/pek.jpeg" alt="myProfilePicture">
                 <span class="text•">Pek</span>
               </div>
     
               <div class="icons">
                 <i class="fa-solid fa-circle-half-stroke" @click="changeColorMode"></i>
                 <!-- ADD NEW CHAT *********************** -->
-                <i class="fa-solid fa-message"></i> 
+                <i class="fa-solid fa-circle-plus" @click="newContact"></i>
               </div>
     
             </div>
@@ -90,14 +90,14 @@
                   <div class="px-0">
                     <h5> {{ contact.name }} </h5>
                     <p v-if="contact.messages[contact.messages.length - 1].message.length < 40">
-                      {{ contact.messages.length ? contact.messages[contact.messages.length - 1].message : `** messaggi eliminati **`}}
+                      {{ contact.messages ? contact.messages[contact.messages.length - 1].message : `** messaggi eliminati **`}}
                     </p>
                     <p v-else> {{ contact.messages[contact.messages.length - 1].message.slice(0, 40) + `...` }}  </p>
                   </div>
 
                 </div>
 
-                <div class="orario"> {{ contact.messages.length ? contact.messages[contact.messages.length - 1].date.slice(11, 16) : `` }} </div>
+                <div class="orario"> {{ contact.messages ? contact.messages[contact.messages.length - 1].date.slice(11, 16) : `` }} </div>
 
               </div>
     
@@ -181,7 +181,7 @@
 
               <!-- click per aggiungere un nuovo messaggio alla chat -->
               <div class="messaggio-icon">
-                <i class="fa-solid fa-paper-plane" @click="newMessages()"></i>
+                <i class="bi bi-send" @click="newMessages()"></i>
               </div>
 
             </div>

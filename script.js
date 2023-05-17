@@ -19,9 +19,29 @@ Milestone 5 - opzionale ----- FATTO
 - Visualizzazione ora e ultimo messaggio inviato/ricevuto nella lista dei contatti 
 */
 
+
+// {
+//     name: 'Michele',
+//     avatar: './img/avatar_1.jpg',
+//     visible: true,
+//     messages: [
+//         {
+//             date: '10/01/2020 15:30:55',
+//             message: 'Ora funziona!',
+//             status: 'received'
+//         },
+//         {
+//             date: '10/01/2020 15:50:00',
+//             message: `Bellissimo!`,
+//             status: 'sent'
+//         },
+//     ],
+// }
+
 const app = Vue.createApp({
     data() {
         return {
+            // array dei contatti
             contacts: [
                 {
                     name: 'Michele',
@@ -31,21 +51,6 @@ const app = Vue.createApp({
                         {
                             date: '10/01/2020 15:30:55',
                             message: 'Lo sai che ora in Boolzap TUTTE le icone hanno una funzione?',
-                            status: 'received'
-                        },
-                        {
-                            date: '10/01/2020 15:50:00',
-                            message: `Bellissimo!`,
-                            status: 'sent'
-                        },
-                        {
-                            date: '10/01/2020 16:15:22',
-                            message: 'Già!',
-                            status: 'received'
-                        },
-                        {
-                            date: '10/01/2020 16:15:30',
-                            message: 'Provale e fammi sapere',
                             status: 'received'
                         }
                     ],
@@ -190,6 +195,7 @@ const app = Vue.createApp({
                     ],
                 },
             ],
+            // diverse risposte del bot
             arrReplies: [
                 `Ok! 🙃`,
                 `Scusa, ora sto giocando 🎮`,
@@ -205,6 +211,7 @@ const app = Vue.createApp({
                 `Magari un'altro giorno 😅`
 
             ],
+            // emoji
             emoticons: [
             '\u{1F600}', 
             '\u{1F601}', 
@@ -291,6 +298,107 @@ const app = Vue.createApp({
             '\u{1F498}',
             '\u{1F3AE}',
             ],
+            // sezione per la creazione di un nuovo contatto
+            arrAvatar: [
+                './img/avatar_1.jpg',
+                './img/avatar_2.jpg',
+                './img/avatar_3.jpg',
+                './img/avatar_4.jpg',
+                './img/avatar_5.jpg',
+                './img/avatar_6.jpg',
+                './img/avatar_7.jpg',
+                './img/avatar_8.jpg',
+                './img/avatar_io.jpg',
+            ],
+            arrName: [
+                `Lisa`,
+                `Luca`,
+                `Leila`,
+                `Ugo`,
+                `Leo`,
+                `Antonio`,
+                `Domenico`,
+                `Marco`,
+                `Maurizio`,
+                `Lucia`,
+                `Simone`,
+                `Vito`,
+                `Anna`,
+                `Martina`,
+                `Letizia`
+            ],
+            arrMessage: [
+                {
+                    date: '10/01/2020 15:30:55',
+                    message: 'Qui tutto ok!',
+                    status: 'sent'
+                },
+                {
+                    date: '10/01/2020 15:30:55',
+                    message: 'Come va?',
+                    status: 'sent'
+                },
+                {
+                    date: '10/01/2020 15:30:55',
+                    message: 'Sono qui',
+                    status: 'sent'
+                },
+                {
+                    date: '10/01/2020 15:30:55',
+                    message: 'Sono qua sotto',
+                    status: 'sent'
+                },
+                {
+                    date: '10/01/2020 15:30:55',
+                    message: 'Hai prenotato al ristorante?',
+                    status: 'sent'
+                },
+                {
+                    date: '10/01/2020 15:30:55',
+                    message: 'Sì, dopo chiamo',
+                    status: 'sent'
+                },
+
+                {
+                    date: '10/01/2020 15:30:55',
+                    message: 'Come va?',
+                    status: 'received'
+                },
+                {
+                    date: '10/01/2020 15:30:55',
+                    message: 'Tutto bene!',
+                    status: 'received'
+                },
+                {
+                    date: '10/01/2020 15:30:55',
+                    message: 'Sono qui',
+                    status: 'received'
+                },
+                {
+                    date: '10/01/2020 15:30:55',
+                    message: 'Sto arrivando',
+                    status: 'received'
+                },
+                {
+                    date: '10/01/2020 15:30:55',
+                    message: 'Hai prenotato?',
+                    status: 'received'
+                },
+                {
+                    date: '10/01/2020 15:30:55',
+                    message: 'Tutto fatto!',
+                    status: 'received'
+                },
+            ],
+            emptyContact: [
+                {
+                    name: ``,
+                    avatar: ``,
+                    visible: true,
+                    messages: []
+                }
+            ],
+            // sezione creazione nuovo messaggio e nuova risposta
             newInputSent: {
                 date: '',
                 message: '',
@@ -301,6 +409,7 @@ const app = Vue.createApp({
                 message: '',
                 status: 'received'
             },
+            // utilities
             userSearch: ``,
             messageSearch: ``,
             activeIndex: 0,
@@ -366,6 +475,19 @@ const app = Vue.createApp({
             }
 
         },
+        newContact() { // DA FINIRE
+            let randomName = this.arrName[this.getRandomInt(0, this.arrName.length - 1)];
+            let randomAvatar = this.arrAvatar[this.getRandomInt(0, this.arrAvatar.length - 1)];
+            // let randomNumber = this.arrMessage[this.getRandomInt(0, this.arrMessage.length - 1)];
+
+            this.emptyContact.name = randomName;
+            this.emptyContact.avatar = randomAvatar;
+            // this.emptyContact.messages.push(randomNumber);
+            
+            console.log(this.emptyContact);
+            
+            // this.contacts.push(this.emptyContact)
+        },
 		getRandomInt(min, max) {
 			return Math.floor(Math.random() * (max - min + 1) ) + min;
 		},
@@ -415,8 +537,14 @@ const app = Vue.createApp({
         },
         filteredMessages() {
             if (!this.messageSearch) {
-              // se la ricerca è vuota, restituisce tutti gli oggetti
-              return this.contacts[this.activeIndex].messages;
+
+                // se la ricerca è vuota, restituisce tutti gli oggetti
+                if (this.contacts[this.activeIndex].messages == ``) {
+                    return 
+                } else {
+                    return this.contacts[this.activeIndex].messages;
+                }
+
             } else {
               // altrimenti, filtra gli oggetti in base alla ricerca
               return this.contacts[this.activeIndex].messages.filter((messages) => {
