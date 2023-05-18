@@ -298,106 +298,6 @@ const app = Vue.createApp({
             '\u{1F498}',
             '\u{1F3AE}',
             ],
-            // sezione per la creazione di un nuovo contatto
-            arrAvatar: [
-                './img/avatar_1.jpg',
-                './img/avatar_2.jpg',
-                './img/avatar_3.jpg',
-                './img/avatar_4.jpg',
-                './img/avatar_5.jpg',
-                './img/avatar_6.jpg',
-                './img/avatar_7.jpg',
-                './img/avatar_8.jpg',
-                './img/avatar_io.jpg',
-            ],
-            arrName: [
-                `Lisa`,
-                `Luca`,
-                `Leila`,
-                `Ugo`,
-                `Leo`,
-                `Antonio`,
-                `Domenico`,
-                `Marco`,
-                `Maurizio`,
-                `Lucia`,
-                `Simone`,
-                `Vito`,
-                `Anna`,
-                `Martina`,
-                `Letizia`
-            ],
-            arrMessage: [
-                {
-                    date: '10/01/2020 15:30:55',
-                    message: 'Qui tutto ok!',
-                    status: 'sent'
-                },
-                {
-                    date: '10/01/2020 15:30:55',
-                    message: 'Come va?',
-                    status: 'sent'
-                },
-                {
-                    date: '10/01/2020 15:30:55',
-                    message: 'Sono qui',
-                    status: 'sent'
-                },
-                {
-                    date: '10/01/2020 15:30:55',
-                    message: 'Sono qua sotto',
-                    status: 'sent'
-                },
-                {
-                    date: '10/01/2020 15:30:55',
-                    message: 'Hai prenotato al ristorante?',
-                    status: 'sent'
-                },
-                {
-                    date: '10/01/2020 15:30:55',
-                    message: 'Sì, dopo chiamo',
-                    status: 'sent'
-                },
-
-                {
-                    date: '10/01/2020 15:30:55',
-                    message: 'Come va?',
-                    status: 'received'
-                },
-                {
-                    date: '10/01/2020 15:30:55',
-                    message: 'Tutto bene!',
-                    status: 'received'
-                },
-                {
-                    date: '10/01/2020 15:30:55',
-                    message: 'Sono qui',
-                    status: 'received'
-                },
-                {
-                    date: '10/01/2020 15:30:55',
-                    message: 'Sto arrivando',
-                    status: 'received'
-                },
-                {
-                    date: '10/01/2020 15:30:55',
-                    message: 'Hai prenotato?',
-                    status: 'received'
-                },
-                {
-                    date: '10/01/2020 15:30:55',
-                    message: 'Tutto fatto!',
-                    status: 'received'
-                },
-            ],
-            emptyContact: [
-                {
-                    name: ``,
-                    avatar: ``,
-                    visible: true,
-                    messages: []
-                }
-            ],
             // sezione creazione nuovo messaggio e nuova risposta
             newInputSent: {
                 date: '',
@@ -474,19 +374,6 @@ const app = Vue.createApp({
                 }, 1000);
             }
 
-        },
-        newContact() { // DA FINIRE
-            let randomName = this.arrName[this.getRandomInt(0, this.arrName.length - 1)];
-            let randomAvatar = this.arrAvatar[this.getRandomInt(0, this.arrAvatar.length - 1)];
-            // let randomNumber = this.arrMessage[this.getRandomInt(0, this.arrMessage.length - 1)];
-
-            this.emptyContact.name = randomName;
-            this.emptyContact.avatar = randomAvatar;
-            // this.emptyContact.messages.push(randomNumber);
-            
-            console.log(this.emptyContact);
-            
-            // this.contacts.push(this.emptyContact)
         },
 		getRandomInt(min, max) {
 			return Math.floor(Math.random() * (max - min + 1) ) + min;
